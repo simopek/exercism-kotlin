@@ -1,3 +1,9 @@
 fun reverse(input: String): String {
-    TODO("Implement this function to complete the task")
-}
+
+    var revertedInput = ""
+    for (i in (input.length - 1) downTo 0 ) {
+        revertedInput += input[i]
+    }
+
+    return revertedInput
+ }
