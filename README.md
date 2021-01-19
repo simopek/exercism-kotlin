@@ -1,1 +1,1 @@
-Repository with the exercise from the exercism's Kotlin track
+Repository with the exercises from the exercism's Kotlin track
