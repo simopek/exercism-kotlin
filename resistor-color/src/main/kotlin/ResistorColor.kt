@@ -1,11 +1,14 @@
 object ResistorColor {
 
+    private val colors = listOf("black", "brown", "red", "orange",
+        "yellow", "green", "blue", "violet", "grey", "white")
+
     fun colorCode(input: String): Int {
-        TODO("Implement this to complete the task")
+        return colors.indexOf(input.toLowerCase())
     }
 
     fun colors(): List<String> {
-        TODO("Implement this to complete the task")
+       return colors
     }
 
 }
