@@ -1,6 +1,21 @@
-data class Year(val todo: Nothing) {
+data class Year(val value: Int) {
 
-    // TODO: Implement proper constructor
+    val isLeap = computeLeapness()
 
-    val isLeap: Boolean = TODO("Implement this getter to complete the task")
+    private fun computeLeapness(): Boolean {
+
+        return if (value % 4 == 0) {
+
+            if (value % 100 == 0) {
+
+                value % 400 == 0
+            } else {
+                true
+            }
+        } else {
+            false
+        }
+
+
+    }
 }
