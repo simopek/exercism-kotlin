@@ -1,5 +1,6 @@
 object Pangram {
 
+    /*
     fun isPangram(input: String): Boolean {
 
         // we create a map that says for each ASCII character if we found a match
@@ -10,5 +11,12 @@ object Pangram {
         // in case the maps contains a "false" value, that means at least one character
         // was not found
         return !foundChars.containsValue(value = false)
+    }
+
+     */
+
+    fun isPangram(input: String): Boolean {
+
+        return ((97..122).map { it.toChar() }.toSet() - input.toLowerCase().toSet()).isEmpty()
     }
 }
