@@ -4,7 +4,7 @@ import kotlin.test.assertFalse
 import kotlin.test.assertNotEquals
 import kotlin.test.assertTrue
 
-class CustomSetTest {
+class CustomSetTest() {
 
     @Test
     fun `sets with no elements are empty`() {

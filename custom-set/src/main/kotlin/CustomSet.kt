@@ -1,40 +1,59 @@
-class CustomSet() {
+class CustomSet(private vararg val _elements: Int) {
 
-    // TODO: implement proper constructor
+    private val elements: MutableList<Int> = _elements.distinct().toMutableList()
 
-    fun isEmpty(): Boolean {
-        TODO("Implement this function to complete the task")
-    }
+    fun isEmpty(): Boolean  = elements.isEmpty()
 
     fun isSubset(other: CustomSet): Boolean {
-        TODO("Implement this function to complete the task")
+        return elements.none { !other.contains(it) }
     }
 
     fun isDisjoint(other: CustomSet): Boolean {
-        TODO("Implement this function to complete the task")
+        return elements.none { other.contains(it) }
     }
 
-    fun contains(other: Int): Boolean {
-        TODO("Implement this function to complete the task")
-    }
+    fun contains(other: Int): Boolean = elements.contains(other)
 
     fun intersection(other: CustomSet): CustomSet {
-        TODO("Implement this function to complete the task")
+      val newElements = elements.filter { it -> other.contains(it) }
+      return CustomSet(*newElements.toIntArray())
     }
 
     fun add(other: Int) {
-        TODO("Implement this function to complete the task")
+
+        if (contains(other)) {
+            return
+        }
+        elements.add(other)
     }
 
     override fun equals(other: Any?): Boolean {
-        TODO("Implement this function to complete the task")
+
+        if (other == null) {
+            return false
+        }
+
+        return when (other) {
+            is CustomSet -> isSubset(other) && other.elements.size == elements.size
+            else -> false
+        }
+
     }
 
     operator fun plus(other: CustomSet): CustomSet {
-        TODO("Implement this function to complete the task")
+
+        val newElements = other.elements.filter { !contains(it) }.toMutableList()
+        newElements.addAll(elements)
+
+        return CustomSet(*newElements.toIntArray())
     }
 
     operator fun minus(other: CustomSet): CustomSet {
-        TODO("Implement this function to complete the task")
+
+        val newElements = mutableListOf<Int>()
+        newElements.addAll(elements)
+        newElements.removeIf { other.contains(it) }
+
+        return CustomSet(*newElements.toIntArray())
     }
 }
