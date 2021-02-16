@@ -28,20 +28,33 @@ object RunLengthEncoding {
 
         var output = StringBuilder()
 
-        var readingDigits = false
-        var charIdx = 0
-        while (charIdx < input.length) {
+        // it tells if we are reading the number by which the following character has to be repeated
+        var readingCharCounter = false
+        var charCounterBldr = StringBuilder()
 
-            var currInput = input.slice(charIdx until input.length)
-            // we get all the chars until we find a different one
-            var currCharSubstring = currInput.takeWhile { c -> !c.isDigit() }
+        input.forEach { currChar ->
 
-            if (currCharSubstring.isNotBlank()) {
-                output = output.append(currCharSubstring)
-            }
-            
-            charIdx += currCharSubstring.length
-            readingDigits = true
+           when  {
+               currChar.isDigit() -> {
+
+                   if (!readingCharCounter) {
+                       charCounterBldr = StringBuilder()
+                       readingCharCounter = true
+                   }
+
+                   charCounterBldr = charCounterBldr.append(currChar)
+               }
+               else -> {
+
+                   output = if (readingCharCounter) {
+
+                       readingCharCounter = false
+                       output.append(currChar.toString().repeat(charCounterBldr.toString().toInt()))
+                   } else {
+                       output.append(currChar)
+                   }
+               }
+           }
         }
 
         return output.toString()
